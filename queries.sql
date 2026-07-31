@@ -14,11 +14,12 @@ CREATE TABLE fraud_predictions (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Log a scored transaction (parameterised in Python via SQLAlchemy)
+-- 2. Log a scored transaction (example values)
+-- Note: in production this is called from Python with parameterised values
 INSERT INTO fraud_predictions 
     (transaction_id, amount, time_seconds, fraud_probability, prediction, flagged_as_fraud)
 VALUES 
-    (:tid, :amount, :time, :prob, :pred, :flagged);
+    ('TXN_EXAMPLE', 49.99, 12345.0, 0.0234, 0, FALSE);
 
 -- 3. Verify connection and total row count
 SELECT COUNT(*) FROM fraud_predictions;
